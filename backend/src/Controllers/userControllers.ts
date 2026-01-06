@@ -30,8 +30,9 @@ bcrypt.genSalt(12, function(err, salt) {
     name,
     gmail,
     password:hash,
+    role:"Student"
 });
-let token=jwt.sign({gmail:gmail,userId:newUser._id},process.env.JWT_SECRET!);
+let token=jwt.sign({gmail:gmail,userId:newUser._id,role:newUser.role},process.env.JWT_SECRET!);
 res.cookie("token",token,{
     httpOnly:true,
     secure:true,
@@ -54,6 +55,12 @@ export const getSignIn=async(req:Request,res:Response)=>{
             message:"Something went Wrong"
         });
     }
+    if(!checkUser.role){
+        return res.status(401).json({
+            message:"Role Undefined"
+        });
+    }
+
     if(!checkUser.password){
         return res.status(401).json({
             message:"Something went wrong",
@@ -77,6 +84,7 @@ export const getSignIn=async(req:Request,res:Response)=>{
             _id:checkUser._id,
             name:checkUser.name,
             gmail:checkUser.gmail,
+            role:checkUser.role,
         },
         message:"Login Successfully",
     });
