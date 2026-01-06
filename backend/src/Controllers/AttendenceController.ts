@@ -20,7 +20,7 @@ const userId=user.userId;
 const today=new Date();
 today.setHours(0,0,0,0);
 const todayStr=today.toISOString();
-const alreadyMarked=await AttendenceModel.findOne({userId,date:today,subject});
+const alreadyMarked=await AttendenceModel.findOne({userId,date:todayStr,subject});
 if(alreadyMarked){
     return res.status(401).json({
         message:"Attendence already marked for today",
