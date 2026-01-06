@@ -72,7 +72,7 @@ export const getSignIn=async(req:Request,res:Response)=>{
             message:"Password is incorrect",
         });
     }
-    let token=jwt.sign({gmail:gmail,userId:checkUser._id},process.env.JWT_SECRET!);
+    let token=jwt.sign({gmail:gmail,userId:checkUser._id,role:checkUser.role},process.env.JWT_SECRET!);
     res.cookie("token",token,{
         httpOnly:true,
         secure:true,
