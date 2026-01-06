@@ -7,7 +7,7 @@ export const StudentCheck=async(req:Request,res:Response)=>{
             message:"Enter detail properly",
         });
     }
-    const user=(req as any).user;
+    const user=(req as any).user; 
     const userId=user.userId;
     const SearchStudentId=await studentModel.findOne({userId});
     if(SearchStudentId){
