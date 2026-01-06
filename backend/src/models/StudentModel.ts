@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import { defaultMaxListeners } from "nodemailer/lib/xoauth2";
 const studentSchema=new mongoose.Schema({
     userId:{
         type:mongoose.Schema.Types.ObjectId,
+        ref:"user",
         required:true,
     },
     rollNo:{

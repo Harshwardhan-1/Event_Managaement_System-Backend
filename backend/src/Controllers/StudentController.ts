@@ -40,7 +40,8 @@ export const StudentCheck=async(req:Request,res:Response)=>{
 export const StudentProfile=async(req:Request,res:Response)=>{
     const user=(req as any).user;
     const userId=user.userId;
-    const find=await studentModel.findOne({userId});
+    const find=await studentModel.findOne({userId})
+    .populate("userId","name gmail")
     if(!find){
         return res.status(404).json({
             message:"profile not exist",
