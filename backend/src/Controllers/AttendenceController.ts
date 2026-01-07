@@ -38,3 +38,27 @@ return res.status(200).json({
     data:AddDetail,
 });
 }
+
+
+
+
+export const particularAttendence=async(req:Request,res:Response)=>{
+    const {subjectName,subjectTeacher}=req.body;
+    if(!subjectName || !subjectTeacher){
+        return res.status(401).json({
+            message:"Fill Details Properly",
+        });
+    }
+const user=(req as any).user;
+const userId=user.userId;
+const attendenceRecord=await AttendenceModel.find({userId,subjectName,subjectTeacher}).sort({date:1});
+    if(attendenceRecord.length===0){
+        return res.status(404).json({
+            message:"No attendence record found for this account"
+        });
+    }
+    return res.status(200).json({
+        message:"User Attendence",
+        data:attendenceRecord
+    });
+}
