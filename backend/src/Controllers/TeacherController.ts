@@ -36,7 +36,7 @@ export const TeacherExist=async(req:Request,res:Response)=>{
 const findTeacher=await TeacherModel.findOne({userId});
 if(!findTeacher){
     return res.status(401).json({
-        message:"Teacher Not found",
+        message:"Teacher Not Found",
     });
 }
 return res.status(200).json({
