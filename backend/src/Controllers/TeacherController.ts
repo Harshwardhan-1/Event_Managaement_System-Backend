@@ -49,14 +49,23 @@ return res.status(200).json({
 export const fetch=async(req:Request,res:Response)=>{
     const user=(req as any).user;
     const userId=user.userId;
-    const getTeacher=await TeacherModel.findOne({userId});
+    const getTeacher=await TeacherModel.findOne({userId}).populate('userId');
     if(!getTeacher){
         return res.status(401).json({
             message:"Teacher Not Found",
         });
     }
+    const teacher=getTeacher as any;
+    const userData=teacher.userId;
     return res.status(200).json({
         message:"ProfileFind",
-        data:getTeacher,
-    })
-}
+        data:{
+            name:userData.name,
+            gmail:userData.gmail,
+            teacherId:getTeacher.teacherId,
+            subject:getTeacher.subject,
+            department:getTeacher.department,
+            section:getTeacher.section,
+        }
+    });
+}  
