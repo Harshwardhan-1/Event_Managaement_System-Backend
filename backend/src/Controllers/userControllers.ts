@@ -301,14 +301,12 @@ export const MakeAdmin=async(req:Request,res:Response)=>{
 
 export const DeleteAnyone=async(req:Request,res:Response)=>{
     const {gmail}=req.body;
-    const user=(req as any).user;
-    const userId=user.userId;
     if(!gmail){
         return res.status(401).json({
             message:"provide gmail",
         });
     }
-    const check=await userModel.findByIdAndDelete(userId);
+    const check=await userModel.findOneAndDelete({gmail});
     if(!check){
         return res.status(401).json({
             message:"user not found",
