@@ -3,6 +3,7 @@ import { Resend } from 'resend';
 import {userModel} from '../models/userModel';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import { signUpValidator } from '../validators/AuthValidators';
 const resend = new Resend(process.env.RESEND_API_KEY);
 export const getAll=async(req:Request,res:Response)=>{
     const allUser=await userModel.find();
@@ -17,6 +18,19 @@ if(!name || !gmail || !password){
         message:"Enter proper detail"
     }); 
 }
+
+const result=signUpValidator({name,password});
+if(result.message=== 'name must have at least 3 characters'){
+    return res.status(401).json({
+        message:"name should be atleast of 3 characters",
+    });
+}
+if(result.message=== 'password must have atleast of 3 character'){
+   return res.status(401).json({
+    message:"password must be atleast of 3 character",
+   });
+}
+
 const check=await userModel.findOne({gmail});
 if(check){
     return res.status(401).json({
@@ -318,6 +332,3 @@ export const DeleteAnyone=async(req:Request,res:Response)=>{
         });
     }
 }
-
-
-

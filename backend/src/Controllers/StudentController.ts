@@ -1,11 +1,18 @@
 import { studentModel } from '../models/StudentModel';
 import {Request,Response} from 'express';
 import { validatePhone } from '../utils/validatePhone';
+import { MakeStudentValidator } from '../validators/MakeStudentValidator';
 export const StudentCheck=async(req:Request,res:Response)=>{
     const {rollNo,branch,section,semester,phone}=req.body;
     if(!rollNo || !branch || !section || !semester || !phone){
         return res.status(401).json({
             message:"Enter detail properly",
+        });
+    }
+    const result=MakeStudentValidator({rollNo});
+    if(!result.valid){
+        return res.status(401).json({
+            message:"rollNo must be atleast of 3 characters",
         });
     }
       if(!validatePhone(phone)){
@@ -35,8 +42,6 @@ export const StudentCheck=async(req:Request,res:Response)=>{
         });
     }
 }
-
-
 
 
 export const StudentProfile=async(req:Request,res:Response)=>{
