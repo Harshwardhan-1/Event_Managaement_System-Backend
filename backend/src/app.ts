@@ -18,6 +18,7 @@ import userRouter from "./Routes/userRoutes";
 import StudentRoutes from "./Routes/StudentRoutes";
 import AttendenceRoutes from "./Routes/AttendenceRoutes";
 import TeacherRoutes from "./Routes/TeacherRoutes";
+import TeacherAttendence from "./Routes/TeacherAttendenceRoutes";
 app.get("/",(req : Request,res:Response)=>{
   res.send("hii harsh here")
 })
@@ -33,6 +34,7 @@ app.use("/api/all",userRouter);
 app.use("/api/Student",StudentRoutes);
 app.use("/api/StudentAttendence",AttendenceRoutes);
 app.use('/api/Teacher',TeacherRoutes);
+app.use('/api/TeacherAttendence',TeacherAttendence);
 const PORT=process.env.PORT || 3000;
 app.listen(PORT,()=>{
   console.log(`Server is listening to http://localhost:${PORT}`)
