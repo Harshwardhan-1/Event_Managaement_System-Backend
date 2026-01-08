@@ -308,7 +308,7 @@ export const DeleteAnyone=async(req:Request,res:Response)=>{
             message:"provide gmail",
         });
     }
-    const check=await userModel.findByIdAndDelete({userId});
+    const check=await userModel.findByIdAndDelete(userId);
     if(!check){
         return res.status(401).json({
             message:"user not found",
