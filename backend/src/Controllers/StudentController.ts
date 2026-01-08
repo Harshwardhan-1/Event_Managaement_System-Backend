@@ -1,10 +1,16 @@
 import { studentModel } from '../models/StudentModel';
 import {Request,Response} from 'express';
+import { validatePhone } from '../utils/validatePhone';
 export const StudentCheck=async(req:Request,res:Response)=>{
     const {rollNo,branch,section,semester,phone}=req.body;
     if(!rollNo || !branch || !section || !semester || !phone){
         return res.status(401).json({
             message:"Enter detail properly",
+        });
+    }
+      if(!validatePhone(phone)){
+        return res.status(400).json({
+            message:"Enter valid mobile number",
         });
     }
     const user=(req as any).user; 
@@ -29,10 +35,6 @@ export const StudentCheck=async(req:Request,res:Response)=>{
         });
     }
 }
-
-
-
-
 
 
 
