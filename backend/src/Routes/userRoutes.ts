@@ -3,6 +3,7 @@ const userRouter=Router();
 import { getSignUp,getAll,getSignIn,forgotPassword,otpVerify, changePassword,getUser,UpdateProfile,MakeAdmin,DeleteAnyone } from '../Controllers/userControllers';
 import verifyToken from '../middleware/verifyToken';
 import verifyAdmin from '../middleware/VerifyAdmin';
+import verifyTeacher from '../middleware/VerifyTeacher';
 
 userRouter.get("/allUser",getAll);
 userRouter.post("/getSignUp",getSignUp);

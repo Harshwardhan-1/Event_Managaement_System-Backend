@@ -52,3 +52,27 @@ export const StudentProfile=async(req:Request,res:Response)=>{
         data:find
     })
 }
+
+
+
+export const particularStudent=async(req:Request,res:Response)=>{
+const {department,section}=req.body;
+if(!department || !section){
+    return res.status(401).json({
+        message:"provide department and section and gmail",
+    });
+}
+
+const checkStudent=await studentModel.find({branch:department,section:section}).populate("userId","name gmail");
+if(checkStudent.length===0){
+    return res.status(401).json({
+        message:"no student found",
+    });
+}
+if(checkStudent){
+    return res.status(200).json({
+        message:"Got ALL Student",
+        data:checkStudent,
+    });
+}
+}

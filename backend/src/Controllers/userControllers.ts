@@ -318,3 +318,6 @@ export const DeleteAnyone=async(req:Request,res:Response)=>{
         });
     }
 }
+
+
+
