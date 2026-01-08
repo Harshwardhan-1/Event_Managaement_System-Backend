@@ -9,5 +9,5 @@ if(!data.rollNo || data.rollNo.length<3){
 }
 return{
     valid:true,
-}
+};
 }
