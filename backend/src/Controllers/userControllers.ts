@@ -295,3 +295,28 @@ export const MakeAdmin=async(req:Request,res:Response)=>{
         data:handleAdmin,
     });
 }
+
+
+
+
+export const DeleteAnyone=async(req:Request,res:Response)=>{
+    const {gmail}=req.body;
+    const user=(req as any).user;
+    const userId=user.userId;
+    if(!gmail){
+        return res.status(401).json({
+            message:"provide gmail",
+        });
+    }
+    const check=await userModel.findByIdAndDelete({userId});
+    if(!check){
+        return res.status(401).json({
+            message:"user not found",
+        });
+    }
+    if(check){
+        return res.status(200).json({
+            message:"user deleted successfully",
+        });
+    }
+}
