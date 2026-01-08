@@ -7,4 +7,4 @@ otp:Number,
 otpExpire:Number,
 role:String,
 })
-export const userModel=mongoose.model("user",userSchema);
+export const userModel=mongoose.model("user",userSchema);   
